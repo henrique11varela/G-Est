@@ -19,7 +19,10 @@ This is a Repo that puts G-Est_frontend and G-Est_backend together
 
 ``` shell
 ./commands.sh run setup && \
-./commands.sh start && \
+./commands.sh start
+```
+
+``` shell
 ./commands.sh run migrate
 ```
 
