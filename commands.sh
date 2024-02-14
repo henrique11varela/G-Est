@@ -87,6 +87,18 @@ case $1 in
 	start)
 		startProject
 		;;
+	start-local)
+		cd G-Est_backend && bash commands.sh start-local && \
+		cd .. && \
+		cd G-Est_frontend && bash commands.sh start-local && \
+		cd .. && \
+		echo "" && \
+		echo "########################################" && \
+		echo "# ~> phpmyadmin: http://localhost/phpmyadmin #" && \
+		echo "# ~> laravel:    http://localhost:8000 #" && \
+		echo "# ~> quasar:     http://localhost:9000   #" && \
+		echo "########################################"
+		;;
 	# stop
 	stop)
 		stopProject
@@ -98,9 +110,24 @@ case $1 in
 			setup)
 				setupProject
 				;;
+			setup-local)
+				(git clone -b dev https://github.com/henrique11varela/G-Est_backend.git || true) && \
+				(git clone -b dev https://github.com/henrique11varela/G-Est_frontend.git || true) && \
+				cd G-Est_backend && bash commands.sh run setup-local && \
+				cd .. && \
+				cd G-Est_frontend && bash commands.sh run setup-local && \
+				cd .. && \
+				echo "app setup"
+				;;
 			# run migrate
 			migrate)
 				migrateProject
+				;;
+			# run migrate
+			migrate-local)
+				cd G-Est_backend && \
+				bash commands.sh migrate-local && \
+				cd .. 
 				;;
 			# run ____
 			*)
